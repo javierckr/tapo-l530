@@ -1,2 +1,3 @@
+gpiozero==1.6.2
 PyP100==0.0.18
 python-dotenv==0.19.2

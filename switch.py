@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 
-import RPi.GPIO as GPIO  # Import Raspberry Pi GPIO library
+from gpiozero import Button
 from room import rooms
-on = False
 
 
-def button_callback():
+def switch(on):
     room = rooms()
     room.login()
     if on:
         room.poweroff()
+        return False
     else:
         room.poweron()
+        return True
 
 
-GPIO.setwarnings(False)  # Ignore warning for now
+def main():
+    on = False
+    while True:
+        button = Button(2)
+        button.wait_for_press()
+        on = switch(on)
 
-GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
-GPIO.setup(
-    10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN
-)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.add_event_detect(
-    10, GPIO.RISING, callback=button_callback
-)  # Setup event on pin 10 rising edge
-
-message = input("Press enter to quit\n\n")  # Run until someone presses enter
-
-GPIO.cleanup()  # Clean up
+if __name__ == '__main__':
+    main()
