@@ -8,19 +8,26 @@ def switch(on):
     room = rooms()
     room.login()
     if on:
-        room.poweroff()
-        return False
+        try:
+            room.poweroff()
+            return False
+        except Exception:
+            return True
     else:
-        room.poweron()
-        return True
+        try:
+            room.poweron()
+            return True
+        except Exception:
+            return False
 
 
 def main():
     on = False
+    button = Button(2)
     while True:
-        button = Button(2)
         button.wait_for_press()
         on = switch(on)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
