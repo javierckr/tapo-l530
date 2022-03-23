@@ -11,13 +11,13 @@ def switch(on):
         try:
             room.poweroff()
             return False
-        except Exception:
+        except:
             return True
     else:
         try:
             room.poweron()
             return True
-        except Exception:
+        except:
             return False
 
 
