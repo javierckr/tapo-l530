@@ -43,3 +43,11 @@ class rooms:
         """Power off all bulbs"""
         for bulb in self.bulbs:
             bulb.turnOff()
+
+    def disco(self):
+        """Bulbs in disco mode"""
+        self.poweron()
+        for bulb in self.bulbs:
+            for i in range(1, 100):
+                for j in range(1, 100):
+                    bulb.setColor(i, j)

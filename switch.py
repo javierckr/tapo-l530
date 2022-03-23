@@ -6,19 +6,18 @@ from room import rooms
 
 def switch(on):
     room = rooms()
-    room.login()
+    while True:
+        try:
+            room.login()
+            break
+        except Exception:
+            print("Login error, retrying")
     if on:
-        try:
-            room.poweroff()
-            return False
-        except:
-            return True
+        room.poweroff()
+        return False
     else:
-        try:
-            room.poweron()
-            return True
-        except:
-            return False
+        room.poweron()
+        return True
 
 
 def main():
