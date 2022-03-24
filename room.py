@@ -6,6 +6,8 @@ from PyP100 import PyL530
 
 from dotenv import load_dotenv
 
+from time import sleep
+
 
 class rooms:
     ## Methods and function for a group of bulbs
@@ -47,7 +49,8 @@ class rooms:
     def disco(self):
         """Bulbs in disco mode"""
         self.poweron()
-        for bulb in self.bulbs:
-            for i in range(1, 100):
-                for j in range(1, 100):
+        for i in range(0, 100, 10):
+            for j in range(0, 100, 10):
+                for bulb in self.bulbs:
                     bulb.setColor(i, j)
+                    sleep(1)
